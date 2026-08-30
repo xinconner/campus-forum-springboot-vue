@@ -1,26 +1,34 @@
-# Campus Forum 校园论坛系统
-一个基于 Spring Boot 3 + Vue 3 的前后端分离校园论坛项目，使用 JWT 完成身份认证。
-***
-### 后端功能与技术点
-用户注册、用户登录、重置密码等基础功能以及对应接口
-* 采用Mybatis-Plus作为持久层框架，使用更便捷
-* 采用Redis存储注册/重置操作验证码，带过期时间控制
-* 采用RabbitMQ积压短信发送任务，再由监听器统一处理
-* 采用SpringSecurity作为权限校验框架，手动整合Jwt校验方案
-* 采用Redis进行IP地址限流处理，防刷接口
-* 视图层对象和数据层对象分离，编写工具方法利用反射快速互相转换
-* 错误和异常页面统一采用JSON格式返回，前端处理响应更统一
-* 手动处理跨域，采用过滤器实现
-* 使用Swagger作为接口文档自动生成，已自动配置登录相关接口
-* 采用过滤器实现对所有请求自动生成雪花ID方便线上定位问题
-* 针对于多环境进行处理，开发环境和生产环境采用不同的配置
-* 日志中包含单次请求完整信息以及对应的雪花ID，支持文件记录
-* 项目整体结构清晰，职责明确，注释全面，开箱即用
+# 校园论坛系统
 
-### 前端功能与技术点
-用户注册、用户登录、重置密码等界面，以及一个简易的主页
-* 采用Vue-Router作为路由
-* 采用Axios作为异步请求框架
-* 采用Element-Plus作为UI组件库
-* 使用VueUse适配深色模式切换
-* 使用unplugin-auto-import按需引入，减少打包后体积
+基于 Spring Boot 3 + Vue 3 的前后端分离校园论坛，提供用户交流、内容管理与校园知识问答能力。
+
+## 主要功能
+
+- 用户注册、登录、封禁、禁言及强制修改密码
+- 帖子发布、分类、搜索、锁定、屏蔽、置顶和违禁词检测
+- 管理端用户、帖子、帖子分类和邮件发送管理
+- 校园知识库 AI 助手，支持基于 RAG 的问答与 SSE 流式聊天
+- RabbitMQ 异步邮件处理及失败消息持久化、状态查询
+
+## 技术亮点
+
+- Spring Security + JWT 实现认证与管理端路由守卫
+- Elasticsearch 提供高效帖子检索，Canal 增量同步 MySQL 数据
+- Redis 用于验证码、缓存和接口限流
+- MyBatis-Plus、RabbitMQ、MinIO、Spring AI 构成后端基础能力
+- Vue 3、Vue Router、Pinia、Element Plus、Axios 构成前端应用
+
+## 快速启动
+
+```bash
+# 启动 MySQL、Redis、RabbitMQ 和 MinIO
+cd infra && docker compose up -d
+
+# 启动后端（Java 17，需要 Maven）
+cd ../my-project-backend && mvn spring-boot:run
+
+# 启动前端
+cd ../my-project-frontend && npm install && npm run dev
+```
+
+AI 功能需按后端配置填写模型服务参数；接口文档启动后可通过 `/swagger-ui.html` 访问。
