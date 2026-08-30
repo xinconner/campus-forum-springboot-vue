@@ -1,0 +1,52 @@
+#生产环境配置
+server:
+  port: 80
+springdoc:
+  api-docs:
+    enabled: false
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring:
+  mail:
+    host: smtp.163.com
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+  rabbitmq:
+    addresses: localhost
+    username: admin
+    password: admin
+    virtual-host: /
+  datasource:
+    url: jdbc:mysql://localhost:3306/study1
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    jwt:
+      key: ${JWT_SECRET}
+      expire: 72
+      limit:
+        base: 10
+        upgrade: 300
+        frequency: 30
+    filter:
+      order: -100
+  web:
+    verify:
+      mail-limit: 60
+    flow:
+      period: 3
+      limit: 10
+      block: 30
+    cors:
+      origin: '*'
+      credentials: false
+      methods: '*'
+  minio:
+    endpoint: 'http://localhost:9000'
+    username: 'minioadmin'
+    password: 'MyMinioPass123'
+  weather:
+    api-host: 'ph6yw3evqn.re.qweatherapi.com'
+    key: ${WEATHER_API_KEY}

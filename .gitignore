@@ -1,0 +1,14 @@
+.DS_Store
+.idea/
+*.iml
+log/
+*.log
+
+my-project-backend/target/
+
+my-project-frontend/node_modules/
+my-project-frontend/dist/
+
+infra/.env
+
+.git.codex-local-before-windows-history-20260814/
